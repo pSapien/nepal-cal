@@ -11,7 +11,7 @@
     "build": "tsc",
     "start": "node bin/ncal.js",
     "dev": "tsc --watch",
-    "start:dev": "node ---watch bin/ncal.js",
+    "start:dev": "node --watch bin/ncal.js",
     "publish": "npm publish --access public"
   },
   "publishConfig": {
