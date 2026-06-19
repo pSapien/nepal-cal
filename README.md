@@ -21,3 +21,18 @@ Prints out the current ongoing Bikram Sambat month with today's date highlighted
 ```bash
 ncal
 ```
+
+2. View the entire year
+Prints out a full year on the terminal with today's date highlighted
+
+```bash
+ncal -y
+```
+
+3. Help Menu
+Display the usuage instructions and available commands
+
+```bash
+ncal -h
+ncal --help
+```
