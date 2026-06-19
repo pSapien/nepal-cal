@@ -49,6 +49,6 @@ export function getWeekDays() {
 }
 
 export function getStartDayOfWeek(year: number, monthIndex: number) {
-  const firstDay = new Date(year, monthIndex);
-  return firstDay.getDay();
+  const date = new NepaliDate(`${year}-${monthIndex + 1}-01`);
+  return date.getDay();
 }
