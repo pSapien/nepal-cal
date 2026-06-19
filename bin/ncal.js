@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-import { run } from '../dist/cli.js';
+const { run } = require('../dist/cli');
 run(process.argv);

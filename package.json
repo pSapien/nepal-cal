@@ -1,17 +1,22 @@
 {
-  "name": "nepal-cal",
-  "version": "0.0.1",
+  "name": "@psapien/nepal-cal",
+  "version": "0.0.4",
   "description": "A command line utility to display a formatted Nepali calendar in the terminal. Think 'cal' but for Nepali calendar",
   "main": "dist/cli.js",
   "bin": {
-    "ncal": "./bin/ncal.js"
+    "ncal": "bin/ncal.js"
   },
   "files": ["bin", "dist"],
   "scripts": {
     "build": "tsc",
     "start": "node bin/ncal.js",
     "dev": "tsc --watch",
-    "start:dev": "node ---watch bin/ncal.js"
+    "start:dev": "node ---watch bin/ncal.js",
+    "publish": "npm publish --access public"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "keywords": [
     "nepali",
@@ -26,7 +31,6 @@
   "author": "Prateek Thapa",
   "license": "ISC",
   "dependencies": {
-    "commander": "15.0.0",
     "nepali-date-converter": "3.4.0"
   },
   "devDependencies": {
