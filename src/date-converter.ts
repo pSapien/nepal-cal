@@ -1,4 +1,4 @@
-import NepaliDate from "nepali-date-converter";
+import NepaliDate, { dateConfigMap } from "nepali-date-converter";
 
 const MONTH_NAMES = [
   "Baisakh",
@@ -25,15 +25,17 @@ export function getTodayDate() {
 }
 
 export function getDaysInMonth(year: number, monthIndex: number) {
-  let daysInMonth = 30;
+  const datesMap = new Map();
+  Object.keys(dateConfigMap).forEach((yearKey) => {
+    const monthsObj = dateConfigMap[yearKey];
+    datesMap.set(yearKey,Object.values(monthsObj));
+  }); 
 
-  for (let day = 32; day <= 29; day--) {
-    const d = new NepaliDate(year, monthIndex, day);
-    if (d.getMonth() === monthIndex && d.getDay() === day) {
-      daysInMonth = day;
-      break;
-    }
-  }
+  const yearMonthArr = datesMap.get(year.toString());
+  if (!yearMonthArr) throw new Error(`Year of ${year} not supported`);
+
+  const daysInMonth = yearMonthArr[monthIndex];
+  if (daysInMonth === undefined) throw new Error("Days in month is undefined");
 
   return daysInMonth;
 }
