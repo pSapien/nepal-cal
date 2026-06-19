@@ -14,6 +14,32 @@ type Config = {
   gap: number;
 };
 
+export function getYearLayout(configs: Config[]) {
+  const monthLayouts = configs.map(c => getMonthLayout(c).split(LINE_BREAK));
+
+  let weeks = '';
+  while (monthLayouts.length) {
+    const firstMonth = monthLayouts.shift()!;
+    const secondMonth = monthLayouts.shift()!;
+    const thirdMonth = monthLayouts.shift()!;
+
+    for (let rowIdx = 0; rowIdx < 8; rowIdx++) {
+      const spacingBetween = SPACING.repeat(4);
+
+      weeks += firstMonth.shift();
+      weeks += spacingBetween;
+      weeks += secondMonth.shift();
+      weeks += spacingBetween;
+      weeks += thirdMonth.shift();
+      weeks += LINE_BREAK;
+    }
+
+    weeks += LINE_BREAK;
+  }
+
+  return weeks;
+}
+
 export function getMonthLayout(config: Config) {
   const { monthName, year, weekDays, gap } = config;
   const layout = [];
@@ -32,8 +58,8 @@ export function getMonthLayout(config: Config) {
    * @example Baishakh 2082
    */
   const headerTitle = `${monthName} ${year}`;
-  const leftPadding = Math.floor((maxWidth - headerTitle.length) / 2);
-  layout.push(SPACING.repeat(leftPadding) + headerTitle);
+  const padding = Math.floor((maxWidth - headerTitle.length) / 2);
+  layout.push(SPACING.repeat(padding) + headerTitle + SPACING.repeat(padding));
 
   /**
    * add the week string to the layout
@@ -48,17 +74,35 @@ export function getMonthLayout(config: Config) {
 
 type WeekGridConfig = Pick<Config, "gap" | "startDayOfWeek" | "daysInMonth" | "highlightDay">;
 
+function fillEmptyCell(count: number) {
+  return Array(count).fill(SPACING + SPACING);
+}
+
 function getWeekLayout(config: WeekGridConfig, columnGap: string) {
   const { startDayOfWeek, daysInMonth, highlightDay } = config;
-  const emptyCells = Array(startDayOfWeek).fill(SPACING + SPACING);
 
+  const startCells = fillEmptyCell(startDayOfWeek);
   const dayCells = Array.from({ length: daysInMonth }, (_, i) => {
     const day = i + 1;
     const paddedStr = day.toString().padStart(2, SPACING);
     return day === highlightDay ? highlight(paddedStr) : paddedStr;
   });
 
-  return chunkArr([...emptyCells, ...dayCells], DAYS_IN_WEEK)
-    .map((week) => week.join(columnGap))
-    .join(LINE_BREAK);
-}
+  const weekLines = chunkArr([...startCells, ...dayCells], DAYS_IN_WEEK).map((week) => {
+    const lastWeek = DAYS_IN_WEEK - week.length;
+    const lastWeekEmptyCells = fillEmptyCell(lastWeek);
+    return [...week, ...lastWeekEmptyCells].join(columnGap);
+  });
+
+  const MAX_WEEKS = 6;
+  const diff = MAX_WEEKS - weekLines.length;
+  if (diff) {
+    const emptyWeeks = Array({ length: diff }).map(() => {
+      const emptyDays = Array.from({ length: DAYS_IN_WEEK }, () => SPACING.repeat(2));
+      return emptyDays.join(columnGap);
+    });
+    weekLines.push(...emptyWeeks);
+  }
+
+  return weekLines.join(LINE_BREAK);
+};
