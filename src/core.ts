@@ -29,11 +29,11 @@ function generateYearView(year: number) {
     };
   });
 
-  console.log(getYearLayout(monthInfo));
+  return getYearLayout(monthInfo);
 }
 
 function generateMonthView(year: number, monthIndex: number, dayIndex: number) {
-  const monthLayout = getMonthLayout({
+  return getMonthLayout({
     daysInMonth: getDaysInMonth(year, monthIndex),
     monthName: getMonthName(monthIndex),
     highlightDay: dayIndex,
@@ -42,6 +42,4 @@ function generateMonthView(year: number, monthIndex: number, dayIndex: number) {
     year,
     gap: 1,
   });
-
-  console.log(monthLayout);
 }
