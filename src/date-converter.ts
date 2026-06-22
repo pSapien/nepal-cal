@@ -24,6 +24,17 @@ export function getTodayDate() {
   };
 }
 
+export function getMonthDate(monthIndex: number) {
+  const today = new NepaliDate();
+  const month = new NepaliDate(`${today.getYear()}-${monthIndex}-01`);
+
+  return {
+    dayIndex: month.getDate(),
+    monthIndex: month.getMonth(),
+    year: month.getYear(),
+  }
+}
+
 export function getDaysInMonth(year: number, monthIndex: number) {
   const datesMap = new Map();
   Object.keys(dateConfigMap).forEach((yearKey) => {
