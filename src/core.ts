@@ -7,6 +7,7 @@ import {
   getMonthDate,
   getMonthIndexByAliasName,
 } from "./date-converter.js";
+import { MONTH_ALIASES, MONTH_NAMES } from "./config.js";
 import { getMonthLayout, getYearLayout } from "./layout.js";
 
 export function viewCurrentMonth() {
@@ -20,7 +21,7 @@ export function viewCurrentYearMonth(monthIndex: number) {
 }
 
 export function viewCurrentYearMonthByName(monthName: string) {
-  const monthIndex = getMonthIndexByAliasName(monthName);
+  const monthIndex = getMonthIndexByAliasName(MONTH_ALIASES, monthName);
   if (!monthIndex) return null;
   return viewCurrentYearMonth(monthIndex);
 }
@@ -42,7 +43,7 @@ function getMonthConfig(year: number, monthIndex: number) {
   const highlightDay = today.monthIndex === monthIndex && today.year === year ? today.dayIndex : -1;
   return {
     daysInMonth: getDaysInMonth(year, monthIndex),
-    monthName: getMonthName(monthIndex),
+    monthName: getMonthName(MONTH_NAMES, monthIndex),
     highlightDay,
     weekDays: getWeekDays(),
     startDayOfWeek: getStartDayOfWeek(year, monthIndex),
