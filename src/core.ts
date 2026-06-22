@@ -15,7 +15,7 @@ export function generateCurrentYearView() {
   return generateYearView(getTodayDate().year);
 }
 
-function generateYearView(year: number) {
+export function generateYearView(year: number) {
   const monthInfo = Array.from({ length: 12 }, (_, monthIndex) => {
     return getMonthConfig(year, monthIndex);
   });
