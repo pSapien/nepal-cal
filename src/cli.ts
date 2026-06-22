@@ -1,5 +1,5 @@
 import { parse } from "./parse.js";
-import { generateCurrentMonthView, generateCurrentYearMonthView, generateCurrentYearView, generateYearView } from "./core.js";
+import { viewCurrentMonth, viewCurrentYearMonth, viewCurrentYear, viewYear } from "./core.js";
 
 const HELP_MESSAGE = `
 Usuage: ncal [options]
@@ -27,7 +27,7 @@ const commands = {
     console.log(HELP_MESSAGE.trim());
   },
   "default": () => {
-    console.log(generateCurrentMonthView());
+    console.log(viewCurrentMonth());
   },
   "-y": (year: any) => {
     if (year) {
@@ -43,11 +43,11 @@ const commands = {
         return;
       }
 
-      console.log(generateYearView(year));
+      console.log(viewYear(year));
       return
     }
   
-    console.log(generateCurrentYearView());
+    console.log(viewCurrentYear());
   },
   "-m": (monthIndex: any) => {
     monthIndex = Number(monthIndex);
@@ -62,7 +62,7 @@ const commands = {
       return;
     }
 
-    console.log(generateCurrentYearMonthView(monthIndex));
+    console.log(viewCurrentYearMonth(monthIndex));
   },
   "error": () => {
     invalidArgsLog();
