@@ -18,7 +18,7 @@ const MONTH_NAMES = [
 export function getTodayDate() {
   const nepalidate = new NepaliDate();
   return {
-    dayIndex: nepalidate.getDay(),
+    dayIndex: nepalidate.getDate(),
     monthIndex: nepalidate.getMonth(),
     year: nepalidate.getYear(),
   };
