@@ -1,4 +1,12 @@
-import { getTodayDate, getDaysInMonth, getWeekDays, getMonthName, getStartDayOfWeek, getMonthDate } from "./date-converter.js";
+import {
+  getTodayDate,
+  getDaysInMonth,
+  getWeekDays,
+  getMonthName,
+  getStartDayOfWeek,
+  getMonthDate,
+  getMonthIndexByAliasName,
+} from "./date-converter.js";
 import { getMonthLayout, getYearLayout } from "./layout.js";
 
 export function viewCurrentMonth() {
@@ -9,6 +17,12 @@ export function viewCurrentMonth() {
 export function viewCurrentYearMonth(monthIndex: number) {
   const month = getMonthDate(monthIndex);
   return getMonthLayout(getMonthConfig(month.year, month.monthIndex));
+}
+
+export function viewCurrentYearMonthByName(monthName: string) {
+  const monthIndex = getMonthIndexByAliasName(monthName);
+  if (!monthIndex) return null;
+  return viewCurrentYearMonth(monthIndex);
 }
 
 export function viewCurrentYear() {
