@@ -1,3 +1,4 @@
+import { parse } from "./parse.js";
 import { generateCurrentMonthView, generateCurrentYearView } from "./core.js";
 
 const HELP_MESSAGE = `
@@ -14,24 +15,26 @@ Examples:
   ncal -y       Shows the 12-month grid for the current year
 `
 
-export function run(argv: string[]) {
-  const args = argv.slice(2);
-
-  if (args.includes("-h") || args.includes("--help")) {
+const commands = {
+  "-h": () => {
     console.log(HELP_MESSAGE.trim());
-    return;
-  }
-
-  if (args.length === 1 && args[0] === '-y') {
+  },
+  "--help": () => {
+    console.log(HELP_MESSAGE.trim());
+  },
+  "default": () => {
+    generateCurrentMonthView();
+  },
+  "-y": () => {
     generateCurrentYearView();
-    return;
-  }
-
-  if (args.length) {
+  },
+  "error": () => {
     console.error('Invalid Arguments');
     console.log(HELP_MESSAGE.trim());
     process.exit(1);
-  }
-
-  generateCurrentMonthView();
+  },
 }
+
+export function run(argv: string[]) {
+  return parse(argv, commands);
+};
