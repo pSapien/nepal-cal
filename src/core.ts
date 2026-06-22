@@ -2,8 +2,8 @@ import { getTodayDate, getDaysInMonth, getWeekDays, getMonthName, getStartDayOfW
 import { getMonthLayout, getYearLayout } from "./layout.js";
 
 export function generateCurrentMonthView() {
-  const { monthIndex, year, dayIndex } = getTodayDate();
-  return generateMonthView(year, monthIndex, dayIndex);
+  const today = getTodayDate();
+  return getMonthLayout(getMonthConfig(today.year, today.monthIndex));
 }
 
 export function generateCurrentYearView() {
@@ -11,35 +11,23 @@ export function generateCurrentYearView() {
 }
 
 function generateYearView(year: number) {
-  const today = getTodayDate();
-  const monthInfo = Array.from({ length: 12 }, (_, idx) => {
-    const monthIndex = idx;
-    const highlightDay = today.monthIndex === idx && today.year === year
-      ? today.dayIndex
-      : -1;
-
-    return {
-      daysInMonth: getDaysInMonth(year, monthIndex),
-      monthName: getMonthName(monthIndex),
-      highlightDay: highlightDay,
-      weekDays: getWeekDays(),
-      startDayOfWeek: getStartDayOfWeek(year, monthIndex),
-      year,
-      gap: 1,
-    };
+  const monthInfo = Array.from({ length: 12 }, (_, monthIndex) => {
+    return getMonthConfig(year, monthIndex);
   });
 
   return getYearLayout(monthInfo);
 }
 
-function generateMonthView(year: number, monthIndex: number, dayIndex: number) {
-  return getMonthLayout({
+function getMonthConfig(year: number, monthIndex: number) {
+  const today = getTodayDate();
+  const highlightDay = today.monthIndex === monthIndex && today.year === year ? today.dayIndex : -1;
+  return {
     daysInMonth: getDaysInMonth(year, monthIndex),
     monthName: getMonthName(monthIndex),
-    highlightDay: dayIndex,
+    highlightDay,
     weekDays: getWeekDays(),
     startDayOfWeek: getStartDayOfWeek(year, monthIndex),
     year,
     gap: 1,
-  });
+  };
 }
