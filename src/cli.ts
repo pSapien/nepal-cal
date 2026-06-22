@@ -23,10 +23,10 @@ const commands = {
     console.log(HELP_MESSAGE.trim());
   },
   "default": () => {
-    generateCurrentMonthView();
+    console.log(generateCurrentMonthView());
   },
   "-y": () => {
-    generateCurrentYearView();
+    console.log(generateCurrentYearView());
   },
   "error": () => {
     console.error('Invalid Arguments');
