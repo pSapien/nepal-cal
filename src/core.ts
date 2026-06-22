@@ -1,9 +1,14 @@
-import { getTodayDate, getDaysInMonth, getWeekDays, getMonthName, getStartDayOfWeek } from "./date-converter.js";
+import { getTodayDate, getDaysInMonth, getWeekDays, getMonthName, getStartDayOfWeek, getMonthDate } from "./date-converter.js";
 import { getMonthLayout, getYearLayout } from "./layout.js";
 
 export function generateCurrentMonthView() {
   const today = getTodayDate();
   return getMonthLayout(getMonthConfig(today.year, today.monthIndex));
+}
+
+export function generateCurrentYearMonthView(monthIndex: number) {
+  const month = getMonthDate(monthIndex);
+  return getMonthLayout(getMonthConfig(month.year, month.monthIndex));
 }
 
 export function generateCurrentYearView() {
