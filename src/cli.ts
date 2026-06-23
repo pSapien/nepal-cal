@@ -1,5 +1,12 @@
 import { parse } from "./parse.js";
-import { viewCurrentMonth, viewCurrentYearMonth, viewCurrentYear, viewYear, viewCurrentYearMonthByName } from "./core.js";
+import {
+  viewCurrentMonth,
+  viewCurrentYearMonth,
+  viewCurrentYear,
+  viewYear,
+  viewCurrentYearMonthByName,
+  viewMonthsHelp,
+} from "./core.js";
 
 const HELP_MESSAGE = `
 Usuage: ncal [options]
@@ -59,6 +66,7 @@ const commands = {
 
       if (!view) {
         invalidArgsLog();
+        console.log(viewMonthsHelp());
         return;
       }
 

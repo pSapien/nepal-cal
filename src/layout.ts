@@ -106,3 +106,35 @@ function getWeekLayout(config: WeekGridConfig, columnGap: string) {
 
   return weekLines.join(LINE_BREAK);
 };
+
+export function getMonthsHelpLayout(monthNames: string[], monthAliases: Record<string, number>) {
+  const aliasByIndexes = new Map<number, Set<string>>();
+  for (const [alias, monthIndex] of Object.entries(monthAliases)) {
+    const prev = aliasByIndexes.get(monthIndex) ?? new Set();
+    prev.add(alias);
+    aliasByIndexes.set(monthIndex, prev);
+  }
+
+  const maxMonthName = Math.max(...monthNames.map(m => m.length));
+
+  const monthsAliases = monthNames.map((monthName, monthIndex) => {
+    const aliasesSet = aliasByIndexes.get(monthIndex);
+    if (!aliasesSet) return null;
+
+    const aliases = Array.from(aliasesSet);
+    const monthSerial = `${monthIndex + 1}.`;
+
+    return [
+      monthSerial.padEnd(3, SPACING),
+      monthName.padEnd(maxMonthName, SPACING),
+      `(Aliases: ${aliases.join(', ')})`,
+    ].join(SPACING + SPACING)
+  })
+  .filter(v => v !== null);
+
+  return [
+    LINE_BREAK,
+    'Supported Month Names & Aliases' + LINE_BREAK,
+    monthsAliases.join(LINE_BREAK),
+  ].join(LINE_BREAK);
+}
