@@ -8,7 +8,7 @@ import {
   getMonthIndexByAliasName,
 } from "./date-converter.js";
 import { MONTH_ALIASES, MONTH_NAMES } from "./config.js";
-import { getMonthLayout, getYearLayout } from "./layout.js";
+import { getMonthLayout, getYearLayout, getMonthsHelpLayout } from "./layout.js";
 
 export function viewCurrentMonth() {
   const today = getTodayDate();
@@ -36,6 +36,10 @@ export function viewYear(year: number) {
   });
 
   return getYearLayout(monthInfo);
+}
+
+export function viewMonthsHelp() {
+  return getMonthsHelpLayout(MONTH_NAMES, MONTH_ALIASES);
 }
 
 function getMonthConfig(year: number, monthIndex: number) {
