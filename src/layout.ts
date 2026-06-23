@@ -127,7 +127,7 @@ export function getMonthsHelpLayout(monthNames: string[], monthAliases: Record<s
     return [
       monthSerial.padEnd(3, SPACING),
       monthName.padEnd(maxMonthName, SPACING),
-      `(Aliases: ${aliases.join(', ')})`,
+      `(${aliases.join(', ')})`,
     ].join(SPACING + SPACING)
   })
   .filter(v => v !== null);

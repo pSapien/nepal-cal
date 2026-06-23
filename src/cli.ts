@@ -14,10 +14,10 @@ Usuage: ncal [options]
 A command-line utility to display a formatted Nepali calendar (B.S)
 
 Options:
-  -y            Display the calendar for the entire current year
-  -m [month]    Display a specific month number (1-12)
-  -y [year]     Display a specific year (2000...2999) or name (e.g., asar)
-  -h --help     Show this help message
+  -y                             Display the calendar for the entire current year
+  -m [number | name | alias]     Display a specific month (1-12, name, or colloquial spelling)
+  -y [year]                      Display a specific year (2000...2999)
+  -h --help                      Show this help message
 
 Examples:
   ncal          Shows the current month
@@ -30,9 +30,11 @@ Examples:
 const commands = {
   "-h": () => {
     console.log(HELP_MESSAGE.trim());
+    console.log(viewMonthsHelp());
   },
   "--help": () => {
     console.log(HELP_MESSAGE.trim());
+    console.log(viewMonthsHelp());
   },
   "default": () => {
     console.log(viewCurrentMonth());
