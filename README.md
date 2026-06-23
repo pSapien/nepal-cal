@@ -22,14 +22,23 @@ Prints out the current ongoing Bikram Sambat month with today's date highlighted
 ncal
 ```
 
-2. View the entire year
-Prints out a full year on the terminal with today's date highlighted
+2. View specific month
+Print out a specific month using its 1–12 index, formal name, or common colloquial spellings (e.g., asar, asoj, chait).
 
-```bash
-ncal -y
+```
+ncal -m 2
+ncal -m asoj
 ```
 
-3. Help Menu
+3. View Entire Year
+Print out a full 12-month calendar grid. Leaving it blank defaults to current year, or you can specify any year between `2000 BS`  and `2999 BS`
+
+```
+ncal -y
+ncal -y 2085
+```
+
+4. Help Menu
 Display the usuage instructions and available commands
 
 ```bash
