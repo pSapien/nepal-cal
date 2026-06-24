@@ -1,7 +1,8 @@
 # @pSapien/nepal-cal 🇳🇵
 
-A command line utility to display a formatted Nepali calendar in the terminal.
-Think `cal` but for Nepali calendar.
+A terminal-based Nepali Calendar (B.S). Think `cal` but built for the Bikram Sambat System
+
+![demo1](assets/demo.gif)
 
 ## Installation
 
@@ -13,33 +14,35 @@ npm install -g @psapien/nepal-cal
 
 ## How to use
 
-Once installed, execute the package via the global `ncal` shortcut
+This package exposes a global `ncal` shortcut in your terminal
 
-1. View the current month
-Prints out the current ongoing Bikram Sambat month with today's date highlighted
+#### 1. Current Mahina
+Running this bare command gives you the current ongoing mahina with today's gatey highlighted
 
 ```bash
 ncal
 ```
 
-2. View specific month
-Print out a specific month using its 1–12 index, formal name, or common colloquial spellings (e.g., asar, asoj, chait).
+####  2. Specific Mahina (`-m`)
+You can pull up a specific mahina using number (1-12), formal name or common colloquial spellings and shortcuts like (asoj, chait, or bai)
 
 ```
 ncal -m 2
 ncal -m asoj
 ```
 
-3. View Entire Year
-Print out a full 12-month calendar grid. Leaving it blank defaults to current year, or you can specify any year between `2000 BS`  and `2999 BS`
+Tip: Run `ncal --help` to see a full list of supported names and shortcuts.
+
+#### 3. Purai Saal (`-y`)
+Print out a full 12-mahina calendar grid. Leaving it blank defaults to current saal, or you can specify any saal between `2000`  and `2999`
 
 ```
 ncal -y
 ncal -y 2085
 ```
 
-4. Help Menu
-Display the usuage instructions and available commands
+#### 4. Help Menu (`-h` `--help`)
+If you want help, then it shall come your way!
 
 ```bash
 ncal -h

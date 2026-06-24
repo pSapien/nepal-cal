@@ -1,7 +1,7 @@
 {
   "name": "@psapien/nepal-cal",
   "version": "0.0.8",
-  "description": "A command line utility to display a formatted Nepali calendar in the terminal. Think 'cal' but for Nepali calendar",
+  "description": "A terminal-based Nepali Calendar (B.S). Think `cal` but built for the Bikram Sambat System",
   "main": "dist/cli.js",
   "bin": {
     "ncal": "bin/ncal.js"
